@@ -2,8 +2,7 @@
 {
     // https://github.com/ccourson/LewanSoul-xArm
     public enum RobotCommand
-    { //                     Dec    *   Hex Tx; Rx
-      //--------------------+-----++-+----+--------------------------------------------------------
+    {
         MultiServoMove = 3, //* 0x03 (byte)count (ushort)milliseconds { (byte)servo (ushort)position[FF00=null] }
 
         GroupDownload = 5, //* 0x05 (byte)cmd (byte)group [parameters]
