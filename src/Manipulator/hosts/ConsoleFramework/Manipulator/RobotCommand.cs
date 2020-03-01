@@ -26,9 +26,9 @@
         GetBatteryVoltage = 15, //  0x0f -none-; (ushort)millivolts
 
         MultiServoOff = 20, //* 0x14 (byte)count { (byte)servo }
-        ServoPositionRead = 21, //* 0x15 (byte)count { (byte)servo }; (byte)count { (byte)servo (ushort)position }
+        ServoPositionRead = 21, //* 0x15 (byte)count { (byte)servo } => (byte)count { (byte)servo (ushort)position }
         ServoOffsetWrite = 22, //* 0x16 (byte)count { (byte)servo }
-        ServoOffsetRead = 23, //* 0x17 (byte)count { (byte)servo }; (byte)count { (byte)servo (sbyte)offset }
+        ServoOffsetRead = 23, //* 0x17 (byte)count { (byte)servo } => (byte)count { (byte)servo (sbyte)offset }
         ServoOffsetAdjust = 24, //* 0x18 (byte)servo (short)offset
 
         ServoSpeed = 26, //* 0x1a (byte)servo (byte)mode[0=servo,1=motor] (ushort)milliseconds

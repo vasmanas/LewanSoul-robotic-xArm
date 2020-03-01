@@ -14,7 +14,9 @@ namespace ConsoleFramework.Manipulator
         private const int vid = 0x0483;
         private const int pid = 0x5750;
 
-        private HidDevice device;
+        private readonly HidDevice device;
+
+        private readonly object disposeLockGate = new object();
 
         public HidDevice Device
         {
@@ -59,7 +61,7 @@ namespace ConsoleFramework.Manipulator
             using (MemoryStream ms = new MemoryStream(buffer))
             using (BinaryWriter bw = new BinaryWriter(ms))
             {
-                bw.Write((byte)0);
+                bw.Write((byte)0); // id
                 bw.Write((ushort)0x5555);
 
                 var servoCount =
@@ -116,6 +118,61 @@ namespace ConsoleFramework.Manipulator
             await Task.Delay(milliseconds + 10);
         }
 
+        public async Task<ushort[]> ServoPositionRead()
+        {
+            var buffer = new byte[device.Capabilities.OutputReportByteLength];
+
+            using (MemoryStream ms = new MemoryStream(buffer))
+            using (BinaryWriter bw = new BinaryWriter(ms))
+            {
+                bw.Write((byte)0);
+                bw.Write((ushort)0x5555);
+
+                bw.Write((byte)9); // Length
+                bw.Write((byte)RobotCommand.ServoPositionRead); /* 1 */ // Command: ServoPositionRead = 21
+
+                bw.Write((byte)6); /* 1 */ // (byte)count
+                bw.Write((byte)1); /* 1 */ // (byte)servo
+                bw.Write((byte)2); /* 1 */ // (byte)servo
+                bw.Write((byte)3); /* 1 */ // (byte)servo
+                bw.Write((byte)4); /* 1 */ // (byte)servo
+                bw.Write((byte)5); /* 1 */ // (byte)servo
+                bw.Write((byte)6); /* 1 */ // (byte)servo
+            }
+
+            await device.WriteAsync(buffer, 300);
+
+            //Console.WriteLine($"{buffer.Length} bytes transmitted.");
+
+            var report = device.ReadReport();
+
+            //Console.WriteLine($"{report.Data.Length} bytes received.");
+
+            var length = report.Data[3] + 3;
+            var data = new byte[length];
+            Array.Copy(report.Data, data, length);
+
+            //Console.WriteLine(BitConverter.ToString(data));
+
+            // (byte)count { (byte)servo (ushort)position }
+            //  0  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19 20 21 22 23
+            // 55-55-15-15-06-01-CD-02-02-B2-02-03-39-00-04-9B-03-05-8B-03-06-80-00-42
+            // 55-55-15-15-06-01-CD-02-02-B2-02-03-39-00-04-9B-03-05-8A-03-06-81-00-20
+            // 55-55-12-15-05-01-CD-02-02-B2-02-03-39-00-04-9B-03-05-8A-03-00-10-00-00
+            //       len   cnt 1        2        3        4        5        6
+            //          cmd
+
+            var servo1 = BitConverter.ToUInt16(data, 6);
+            var servo2 = BitConverter.ToUInt16(data, 9);
+            var servo3 = BitConverter.ToUInt16(data, 12);
+            var servo4 = BitConverter.ToUInt16(data, 15);
+            var servo5 = BitConverter.ToUInt16(data, 18);
+            var servo6 = BitConverter.ToUInt16(data, 21);
+
+            ushort[] arr = { servo1, servo2, servo3, servo4, servo5, servo6 };
+            return arr;
+        }
+
         private void Device_Removed()
         {
             Console.WriteLine("xArm removed.");
@@ -128,8 +185,18 @@ namespace ConsoleFramework.Manipulator
 
         public void Dispose()
         {
-            if (device != null && device.IsOpen)
+            if (device == null || !device.IsOpen)
             {
+                return;
+            }
+
+            lock (this.disposeLockGate)
+            {
+                if (device == null || !device.IsOpen)
+                {
+                    return;
+                }
+
                 device.CloseDevice();
             }
         }
