@@ -8,7 +8,8 @@
 
     // https://keisan.casio.com/exec/system/1273849674
     // https://en.wikipedia.org/wiki/Law_of_cosines
-    // 
+    // https://www.math10.com/en/geometry/geogebra/geogebra.html
+    // http://latex.codecogs.com/eqneditor/editor.php
 
     public class Program
     {
