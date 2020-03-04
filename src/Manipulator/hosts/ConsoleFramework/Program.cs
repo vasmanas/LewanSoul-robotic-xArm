@@ -6,6 +6,10 @@
     using ConsoleFramework.Manipulator;
     using HidLibrary;
 
+    // https://keisan.casio.com/exec/system/1273849674
+    // https://en.wikipedia.org/wiki/Law_of_cosines
+    // 
+
     public class Program
     {
         static async Task Main(string[] args)
