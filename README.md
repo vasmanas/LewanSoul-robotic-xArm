@@ -46,7 +46,14 @@ Finally when <img src="./docs/images/function_j.png">, then:
   <img src="./docs/images/function_m.png">
 </p>
 <br/>
-
+<p align="center">
+  <img src="./docs/images/function_n.png">
+</p>
+<br/>
+<p align="center">
+  <img src="./docs/images/function_o.png">
+</p>
+<br/>
 
 <p align="center">
   <img src="./docs/images/shape_3.png" width="20%" height="20%">
