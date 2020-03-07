@@ -63,7 +63,22 @@ Finally when <img src="./docs/images/function_j.png">, then:
 </p>
 <br/>
 
+Since now all sides and angles of current position are known, it is possible to calculate angles of new position with shift in horisontal or vertical axes. These variables of new position are known: sides a, b, c and d, also shift <img src="./docs/images/function_s.png"> and <img src="./docs/images/function_t.png">.
+
 <p align="center">
   <img src="./docs/images/shape_3.png" width="20%" height="20%">
+</p>
+<br/>
+
+<p align="center">
+  <img src="./docs/images/function_u.png">
+</p>
+<br/>
+<p align="center">
+  <img src="./docs/images/function_v.png">
+</p>
+<br/>
+<p align="center">
+  <img src="./docs/images/function_w.png">
 </p>
 <br/>
