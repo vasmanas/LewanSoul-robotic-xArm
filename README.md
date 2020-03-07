@@ -71,14 +71,46 @@ Since now all sides and angles of current position are known, it is possible to 
 <br/>
 
 <p align="center">
-  <img src="./docs/images/function_u.png">
-</p>
-<br/>
-<p align="center">
   <img src="./docs/images/function_v.png">
 </p>
 <br/>
 <p align="center">
+  <img src="./docs/images/function_u.png">
+</p>
+<br/>
+<p align="center">
   <img src="./docs/images/function_w.png">
+</p>
+<br/>
+<p align="center">
+  <img src="./docs/images/function_x.png">
+</p>
+<br/>
+<p align="center">
+  <img src="./docs/images/function_y.png">
+</p>
+<br/>
+<p align="center">
+  <img src="./docs/images/function_z.png">
+</p>
+<br/>
+<p align="center">
+  <img src="./docs/images/function_za.png">
+</p>
+<br/>
+<p align="center">
+  <img src="./docs/images/function_zb.png">
+</p>
+<br/>
+<p align="center">
+  <img src="./docs/images/function_zc.png">
+</p>
+<br/>
+<p align="center">
+  <img src="./docs/images/function_zd.png">
+</p>
+<br/>
+<p align="center">
+  <img src="./docs/images/function_ze.png">
 </p>
 <br/>
