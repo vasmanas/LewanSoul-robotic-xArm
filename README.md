@@ -25,16 +25,7 @@ Image displays initial arm position. At this poin known are sides a and b, also 
 </p>
 <br/>
 
-Since:
-<p align="center">
-  <img src="./docs/images/function_b.png">
-</p>
-<br/>
-
-Then:
-<p align="center">
-  <img src="./docs/images/function_c.png">
-</p>
+When <img src="./docs/images/function_h.png">, since <img src="./docs/images/function_b.png">, then <img src="./docs/images/function_c.png">
 <br/>
 
 Since:
