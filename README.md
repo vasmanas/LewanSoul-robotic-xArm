@@ -26,30 +26,18 @@ Image displays initial arm position. At this poin known are sides a and b, also 
 <br/>
 
 When <img src="./docs/images/function_h.png">, since <img src="./docs/images/function_b.png">, then <img src="./docs/images/function_c.png">
-<br/>
 
-Since:
-<p align="center">
-  <img src="./docs/images/function_d.png">
-</p>
+When <img src="./docs/images/function_i.png">, since <img src="./docs/images/function_d.png">
 
-And:
-<br/>
+And <img src="./docs/images/function_e.png">, and <img src="./docs/images/function_f.png">
+
+Then <img src="./docs/images/function_g.png">
+
+Finally when <img src="./docs/images/function_j.png">, then:
 <p align="center">
-  <img src="./docs/images/function_e.png">
-</p>
-<br/>
-<p align="center">
-  <img src="./docs/images/function_f.png">
+  <img src="./docs/images/function_k.png">
 </p>
 <br/>
-
-Then:
-<p align="center">
-  <img src="./docs/images/function_g.png">
-</p>
-<br/>
-
 
 
 <p align="center">
