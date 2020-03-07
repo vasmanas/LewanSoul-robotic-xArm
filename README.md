@@ -114,3 +114,5 @@ Since now all sides and angles of current position are known, it is possible to 
   <img src="./docs/images/function_ze.png">
 </p>
 <br/>
+
+At this point all angles of new position are known, it is possible to calculate alngle shifts depending what is needed
