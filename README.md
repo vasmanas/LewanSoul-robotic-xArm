@@ -38,6 +38,14 @@ Finally when <img src="./docs/images/function_j.png">, then:
   <img src="./docs/images/function_k.png">
 </p>
 <br/>
+<p align="center">
+  <img src="./docs/images/function_l.png">
+</p>
+<br/>
+<p align="center">
+  <img src="./docs/images/function_m.png">
+</p>
+<br/>
 
 
 <p align="center">
