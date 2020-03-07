@@ -115,4 +115,4 @@ Since now all sides and angles of current position are known, it is possible to 
 </p>
 <br/>
 
-At this point all angles of new position are known, it is possible to calculate alngle shifts depending what is needed
+At this point all angles of new position are known, it is possible to calculate alngle shifts depending what is needed.
