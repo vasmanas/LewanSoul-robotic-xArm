@@ -5,11 +5,17 @@
     using System.Threading.Tasks;
     using ConsoleFramework.Manipulator;
     using HidLibrary;
+    using ConsoleFramework.Utils;
 
     public class Program
     {
         static async Task Main(string[] args)
         {
+            // var quad = Quadrilateral.WithTwoSidesTwoAngles(7.21, 12.17, 123.69, 65.77);
+            //var quad = Quadrilateral.WithFourSides(7.21, 12.17, 8, 8);
+            //Console.WriteLine(quad);
+            //return;
+
             var device = new Controller();
 
             //await device.MultiServoMove(1000, servo1: 0, servo2: 0, servo3: 500, servo6: 1000);

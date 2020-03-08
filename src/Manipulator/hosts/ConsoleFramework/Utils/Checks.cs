@@ -23,7 +23,7 @@ namespace ConsoleFramework.Utils
                 throw new Exception("From must be lower or equal than to");
             }
 
-            if (from <= value && value <= to)
+            if (from > value || value > to)
             {
                 throw new Exception($"Parameter {parameterName} must be between {from} and {to} degrees");
             }

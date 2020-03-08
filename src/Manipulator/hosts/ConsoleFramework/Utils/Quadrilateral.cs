@@ -32,22 +32,22 @@ namespace ConsoleFramework.Utils
         /// </summary>
         /// <param name="a">Lenth of side a.</param>
         /// <param name="b">Lenth of side b.</param>
-        /// <param name="alpha">Alpha angle in degrees.</param>
-        /// <param name="gamma">Gamma angle in degrees.</param>
+        /// <param name="ad">AD angle in degrees.</param>
+        /// <param name="ba">BA angle in degrees.</param>
         /// <returns>New quadrilateral.</returns>
-        public static Quadrilateral WithTwoSidesTwoAngles(double a, double b, double alpha, double gamma)
+        public static Quadrilateral WithTwoSidesTwoAngles(double a, double b, double ad, double ba)
         {
             Checks.GreaterThanZero(a, nameof(a));
             Checks.GreaterThanZero(b, nameof(b));
-            Checks.Between(alpha, -90, 180, nameof(alpha));
-            Checks.Between(gamma, -90, 180, nameof(gamma));
+            Checks.Between(ad, -90, 180, nameof(ad));
+            Checks.Between(ba, -90, 180, nameof(ba));
 
             var quad = new Quadrilateral();
 
             quad.SideA = a;
             quad.SideB = b;
-            quad.AngleAD = alpha;
-            quad.AngleBA = gamma;
+            quad.AngleAD = ad;
+            quad.AngleBA = ba;
 
             quad.AngleCB = 270 - quad.AngleAD - quad.AngleBA;
             var bx = Triangle.Opposite(quad.SideB, quad.AngleCB);
@@ -83,12 +83,12 @@ namespace ConsoleFramework.Utils
             quad.SideD = d;
 
             var e = Triangle.Hypotenuse(c, d);
-            var alpha1 = Math.Asin(c / e);
-            var beta1 = 90 - alpha1;
-            var alpha2 = Triangle.Angle(quad.SideA, e, quad.SideB);
-            var beta2 = Triangle.Angle(quad.SideB, e, quad.SideA);
-            quad.AngleAD = alpha1 + alpha2;
-            quad.AngleCB = beta1 + beta2;
+            var ad1 = Triangle.ConvertRadiansToDegrees(Math.Asin(c / e));
+            var cb1 = 90 - ad1;
+            var ad2 = Triangle.Angle(quad.SideA, e, quad.SideB);
+            var cb2 = Triangle.Angle(quad.SideB, e, quad.SideA);
+            quad.AngleAD = ad1 + ad2;
+            quad.AngleCB = cb1 + cb2;
             quad.AngleBA = 270 - quad.AngleAD - quad.AngleCB;
 
             return quad;
@@ -97,22 +97,22 @@ namespace ConsoleFramework.Utils
         /// <summary>
         /// Calculate c side.
         /// </summary>
-        /// <param name="beta">Beta angle in degrees.</param>
+        /// <param name="cb">CB angle in degrees.</param>
         /// <param name="ay">Lenth of side a_y.</param>
         /// <param name="by">Lenth of side b_y.</param>
         /// <returns></returns>
-        private static double CalculateC(double beta, double ay, double by)
+        private static double CalculateC(double cb, double ay, double by)
         {
-            Checks.Between(beta, -90, 180, nameof(beta));
+            Checks.Between(cb, -90, 180, nameof(cb));
             Checks.GreaterThanZero(ay, nameof(ay));
             Checks.GreaterThanZero(by, nameof(by));
 
-            if (beta < 90)
+            if (cb < 90)
             {
                 var c = ay + by;
                 return c;
             }
-            else if (beta == 90)
+            else if (cb == 90)
             {
                 var c = ay;
                 return c;
@@ -127,22 +127,22 @@ namespace ConsoleFramework.Utils
         /// <summary>
         /// Calculate d side.
         /// </summary>
-        /// <param name="alpha">Alpha angle in degrees.</param>
+        /// <param name="ad">AD angle in degrees.</param>
         /// <param name="ax">Lenth of side a_x.</param>
         /// <param name="bx">Lenth of side b_x.</param>
         /// <returns></returns>
-        private static double CalculateD(double alpha, double ax, double bx)
+        private static double CalculateD(double ad, double ax, double bx)
         {
-            Checks.Between(alpha, -90, 180, nameof(alpha));
+            Checks.Between(ad, -90, 180, nameof(ad));
             Checks.GreaterThanZero(ax, nameof(ax));
             Checks.GreaterThanZero(bx, nameof(bx));
 
-            if (alpha < 90)
+            if (ad < 90)
             {
                 var d = bx + ax;
                 return d;
             }
-            else if (alpha == 90)
+            else if (ad == 90)
             {
                 var d = bx;
                 return d;

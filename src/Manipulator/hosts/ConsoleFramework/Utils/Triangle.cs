@@ -5,6 +5,28 @@ namespace ConsoleFramework.Utils
     public static class Triangle
     {
         /// <summary>
+        /// Convert degrees to radians.
+        /// </summary>
+        /// <param name="degrees">Degrees.</param>
+        /// <returns>Radians.</returns>
+        public static double ConvertDegreesToRadians(double degrees)
+        {
+            var radians = (Math.PI / 180) * degrees;
+            return radians;
+        }
+
+        /// <summary>
+        /// Convert radians to degrees.
+        /// </summary>
+        /// <param name="radians">Radians.</param>
+        /// <returns>Degrees.</returns>
+        public static double ConvertRadiansToDegrees(double radians)
+        {
+            double degrees = (180 / Math.PI) * radians;
+            return degrees;
+        }
+
+        /// <summary>
         /// Calculate opposite from hypotenuse and angle.
         /// https://keisan.casio.com/exec/system/1273849674.
         /// </summary>
@@ -16,7 +38,7 @@ namespace ConsoleFramework.Utils
             Checks.GreaterThanZero(hypotenuse, nameof(hypotenuse));
             Checks.Between(angle, -360, 360, nameof(angle));
 
-            var opposite = hypotenuse * Math.Sin(angle);
+            var opposite = hypotenuse * Math.Sin(Triangle.ConvertDegreesToRadians(angle));
             return opposite;
         }
 
@@ -65,8 +87,8 @@ namespace ConsoleFramework.Utils
             Checks.GreaterThanZero(sideB, nameof(sideB));
             Checks.GreaterThanZero(opposite, nameof(opposite));
 
-            var angle = Math.Acos((sideA * sideA + sideB * sideB - opposite * opposite) / (2 * sideA * sideB));
-
+            var radians = Math.Acos((sideA * sideA + sideB * sideB - opposite * opposite) / (2 * sideA * sideB));
+            var angle = Triangle.ConvertRadiansToDegrees(radians);
             return angle;
         }
     }
