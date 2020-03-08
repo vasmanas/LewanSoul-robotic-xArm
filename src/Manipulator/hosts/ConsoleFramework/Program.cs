@@ -11,10 +11,15 @@
     {
         static async Task Main(string[] args)
         {
-            // var quad = Quadrilateral.WithTwoSidesTwoAngles(7.21, 12.17, 123.69, 65.77);
-            //var quad = Quadrilateral.WithFourSides(7.21, 12.17, 8, 8);
-            //Console.WriteLine(quad);
-            //return;
+            // TODO: move to tests
+            //var quad1 = Quadrilateral.WithTwoSidesTwoAngles(7.21, 12.17, 123.69, 65.77); // pass
+            //var quad2 = Quadrilateral.WithFourSides(7.21, 12.17, 8, 8); // pass
+            //var quad1 = Quadrilateral.WithTwoSidesTwoAngles(6.32, 6.32, 71.57, 126.87); // pass
+            //var quad2 = Quadrilateral.WithFourSides(6.32, 6.32, 8, 8); // pass
+            //var quad1 = Quadrilateral.WithTwoSidesTwoAngles(10.2, 6.32, 78.69, 82.87); // pass
+            //var quad2 = Quadrilateral.WithFourSides(10.2, 6.32, 8, 8); // pass
+            //var quad1 = Quadrilateral.WithTwoSidesTwoAngles(10.77, 12.17, 111.8, 58.74); // pass
+            //var quad2 = Quadrilateral.WithFourSides(10.77, 12.17, 8, 8); // pass
 
             var device = new Controller();
 
