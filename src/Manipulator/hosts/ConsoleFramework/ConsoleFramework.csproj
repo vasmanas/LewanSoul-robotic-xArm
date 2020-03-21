@@ -53,6 +53,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Manipulator\RobotCommand.cs" />
+    <Compile Include="Utils\Converter.cs" />
     <Compile Include="Utils\Quadrilateral.cs" />
     <Compile Include="Utils\Checks.cs" />
     <Compile Include="Utils\Triangle.cs" />

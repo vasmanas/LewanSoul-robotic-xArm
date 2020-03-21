@@ -50,11 +50,11 @@ namespace ConsoleFramework.Utils
             quad.AngleBA = ba;
 
             quad.AngleCB = 270 - quad.AngleAD - quad.AngleBA;
-            var bx = Triangle.Opposite(quad.SideB, quad.AngleCB);
-            var by = Triangle.Side(quad.SideB, bx);
-            var ay = Triangle.Opposite(quad.SideA, quad.AngleAD);
+            var bx = Triangle.Right.Opposite(quad.SideB, quad.AngleCB);
+            var by = Triangle.Right.Side(quad.SideB, bx);
+            var ay = Triangle.Right.Opposite(quad.SideA, quad.AngleAD);
             quad.SideC = Quadrilateral.CalculateC(quad.AngleCB, ay, by);
-            var ax = Triangle.Side(quad.SideA, ay);
+            var ax = Triangle.Right.Side(quad.SideA, ay);
             quad.SideD = Quadrilateral.CalculateD(quad.AngleAD, ax, bx);
 
             return quad;
@@ -82,8 +82,8 @@ namespace ConsoleFramework.Utils
             quad.SideC = c;
             quad.SideD = d;
 
-            var e = Triangle.Hypotenuse(c, d);
-            var ad1 = Triangle.ConvertRadiansToDegrees(Math.Asin(c / e));
+            var e = Triangle.Right.Hypotenuse(c, d);
+            var ad1 = Converter.RadiansToDegrees(Math.Asin(c / e));
             var cb1 = 90 - ad1;
             var ad2 = Triangle.Angle(quad.SideA, e, quad.SideB);
             var cb2 = Triangle.Angle(quad.SideB, e, quad.SideA);
@@ -110,17 +110,17 @@ namespace ConsoleFramework.Utils
             if (cb < 90)
             {
                 var c = ay + by;
-                return c;
+                return Math.Abs(c);
             }
             else if (cb == 90)
             {
                 var c = ay;
-                return c;
+                return Math.Abs(c);
             }
             else // beta > 90
             {
                 var c = ay - by;
-                return c;
+                return Math.Abs(c);
             }
         }
 
@@ -140,17 +140,17 @@ namespace ConsoleFramework.Utils
             if (ad < 90)
             {
                 var d = bx + ax;
-                return d;
+                return Math.Abs(d);
             }
             else if (ad == 90)
             {
                 var d = bx;
-                return d;
+                return Math.Abs(d);
             }
             else // alpha > 90
             {
                 var d = bx - ax;
-                return d;
+                return Math.Abs(d);
             }
         }
     }

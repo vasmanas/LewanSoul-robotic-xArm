@@ -11,6 +11,11 @@
     {
         static async Task Main(string[] args)
         {
+            //var quadInit2 = Quadrilateral.WithTwoSidesTwoAngles(98, 96, 128.57, 100.8);
+            //var quadDelta2 = Quadrilateral.WithFourSides(98, 96, quadInit2.SideC, Math.Abs(quadInit2.SideD - 20));
+            //var quadInit2 = Quadrilateral.WithTwoSidesTwoAngles(98, 96, 141.17, 101.25);
+            //var quadDelta2 = Quadrilateral.WithFourSides(98, 96, quadInit2.SideC, quadInit2.SideD + 30);
+
             // TODO: move to tests
             //var quad1 = Quadrilateral.WithTwoSidesTwoAngles(7.21, 12.17, 123.69, 65.77); // pass
             //var quad2 = Quadrilateral.WithFourSides(7.21, 12.17, 8, 8); // pass
@@ -28,14 +33,18 @@
 
             //await Program.PointUp(device);
 
+            //await device.MultiServoMove(1000, servo5: 500);
             //await device.MultiServoMove(1000, servo4: 400);
             //await device.MultiServoMove(1000, servo4: 600);
             //await device.MultiServoMove(1000, servo4: 500);
 
-            await device.MultiServoMove(1000, 700, 700, 350, 200, 600, 500);
+            //await device.MultiServoMove(1000, 700, 700, 850, 150, 600, 500);
+            //await device.MultiServoMove(1000, 700, 700, 350, 200, 600, 500);
 
-            positions = await device.ServoPositionRead();
-            Console.WriteLine(string.Join(",", positions));
+            //await device.MultiServoMove(1000, 700, 700, 700, 150, 700, 500);
+
+            //positions = await device.ServoPositionRead();
+            //Console.WriteLine(string.Join(",", positions));
 
             // a = 98 mm
             // b = 96 mm
@@ -54,7 +63,13 @@
             var ad = calcad(positions[4]);
 
             var quadInit = Quadrilateral.WithTwoSidesTwoAngles(98, 96, ad, ba);
-            var quadDelta = Quadrilateral.WithFourSides(98, 96, quadInit.SideC - 50, quadInit.SideD); // pass
+            var quadDelta =
+                Quadrilateral.WithFourSides(
+                    98,
+                    96,
+                    Math.Abs(quadInit.SideC),
+                    Math.Abs(quadInit.SideD - 30)
+                );
 
             Console.WriteLine(quadDelta.AngleAD);
             Console.WriteLine(quadDelta.AngleBA);
