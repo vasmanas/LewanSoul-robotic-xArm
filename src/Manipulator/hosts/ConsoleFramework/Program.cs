@@ -31,17 +31,26 @@
             var positions = await device.ServoPositionRead();
             Console.WriteLine(string.Join(",", positions));
 
-            //await Program.PointUp(device);
+            await Program.PointUp(device);
 
-            //await device.MultiServoMove(1000, servo5: 500);
-            //await device.MultiServoMove(1000, servo4: 400);
-            //await device.MultiServoMove(1000, servo4: 600);
+            // Known:
+            // side from base to first joint
+            // a = 98 mm
+            // side from first join to arm
+            // b = 96 mm
+            // angle between b and a (from side b to a clockwise)
+            // ba = positions[3]: servo4[100, 500, 850] => ba(90, 180, 270)
+            // angle between a and d (from side a to d clockwise)
+            // ad = positions[4]: servo5[100, 500, 850] => ad(0, 90, 180)
+            // angle between d and c (from side a to d clockwise) always 90 degrees
+            // dc = 90 degrees
+            // base direction angle
+            // z = positions[0]: servo6[-90(right), 0, 90(left)] => [120, 500, 880]
+            // direction vector in mm
+            // v = (+/-x, +/-y, +/-z)
+
             //await device.MultiServoMove(1000, servo4: 500);
-
             //await device.MultiServoMove(1000, 700, 700, 850, 150, 600, 500);
-            //await device.MultiServoMove(1000, 700, 700, 350, 200, 600, 500);
-
-            //await device.MultiServoMove(1000, 700, 700, 700, 150, 700, 500);
 
             //positions = await device.ServoPositionRead();
             //Console.WriteLine(string.Join(",", positions));
@@ -51,7 +60,6 @@
             // positions[4]: servo5[100, 500, 850] => ad(0, 90, 180)
             // positions[3]: servo4[100, 500, 850] => ba(90, 180, 270)
 
-            // positions[3]: servo4[100, 500, 850] => ba(90, 180, 270)
             Func<double, double> calcba = pos =>
                 (pos <= 500 ? (90 * (pos - 100)) / 400 : ((90 * (pos - 500)) / 350) + 90) + 90;
 
@@ -114,10 +122,10 @@
                 1000,
                 servo1: 700, // [140(Open), 700(Closed)]
                 servo2: 680, // [0, 1000]
-                servo3: 500, // [90 - 150, 180 - 500, 270 - 900]
-                servo4: 500, // [90 - 100, 180 - 500, 270 - 850]
-                servo5: 500, // [0 - 100, 90 - 500, 180 - 850]
-                servo6: 500); // [0, 1000]
+                servo3: 510, // [90 - 130, 180 - 510, 270 - 880]
+                servo4: 500, // [90 - 130, 180 - 500, 270 - 870]
+                servo5: 490, // [90 - 120, 180 - 490, 270 - 850]
+                servo6: 500); // [-90(right) - 120, 0 - 500, 90(left) - 880]
         }
     }
 }
