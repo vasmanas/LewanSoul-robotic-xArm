@@ -2,6 +2,9 @@
 {
     public static class Arm
     {
+        public const double A = 98; // mm
+        public const double B = 96; // mm
+
         private static double ToAngle(ushort a90, ushort a180, ushort a270, ushort value)
         {
             var dif = value < a180 ? a180 - a90 : a270 - a180;
