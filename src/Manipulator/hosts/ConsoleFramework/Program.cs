@@ -6,6 +6,7 @@
     using ConsoleFramework.Manipulator;
     using HidLibrary;
     using ConsoleFramework.Utils;
+    using ConsoleFramework.Native;
 
     public class Program
     {
@@ -33,6 +34,8 @@
 
             await Program.PointUp(device);
 
+            // TODO: caluclate z axis move
+
             // Known:
             // side from base to first joint
             // a = 98 mm
@@ -55,26 +58,14 @@
             //positions = await device.ServoPositionRead();
             //Console.WriteLine(string.Join(",", positions));
 
-            // a = 98 mm
-            // b = 96 mm
-            // positions[4]: servo5[100, 500, 850] => ad(0, 90, 180)
-            // positions[3]: servo4[100, 500, 850] => ba(90, 180, 270)
+            var ba = Arm.S4ToAngle(positions[3]);
+            var ad = Arm.S5ToAngle(positions[4]);
 
-            Func<double, double> calcba = pos =>
-                (pos <= 500 ? (90 * (pos - 100)) / 400 : ((90 * (pos - 500)) / 350) + 90) + 90;
-
-            // positions[4]: servo5[100, 500, 850] => ad(0, 90, 180)
-            Func<double, double> calcad = pos =>
-                pos <= 500 ? (90 * (pos - 100)) / 400 : ((90 * (pos - 500)) / 350) + 90;
-
-            var ba = calcba(positions[3]);
-            var ad = calcad(positions[4]);
-
-            var quadInit = Quadrilateral.WithTwoSidesTwoAngles(98, 96, ad, ba);
+            var quadInit = Quadrilateral.WithTwoSidesTwoAngles(Arm.A, Arm.B, ad, ba);
             var quadDelta =
                 Quadrilateral.WithFourSides(
-                    98,
-                    96,
+                    Arm.A,
+                    Arm.B,
                     Math.Abs(quadInit.SideC),
                     Math.Abs(quadInit.SideD - 30)
                 );
@@ -82,18 +73,10 @@
             Console.WriteLine(quadDelta.AngleAD);
             Console.WriteLine(quadDelta.AngleBA);
 
-            // ba(90, 180, 270) => servo4[100, 500, 850]
-            Func<double, double> calcServo4 = angle =>
-                angle < 180 ? (400 * (angle - 90) / 90) + 100 : (350 * (angle - 180) / 90) + 500;
-
-            // ad(0, 90, 180) => servo5[100, 500, 850]
-            Func<double, double> calcServo5 = angle =>
-                angle < 90 ? (400 * angle / 90) + 100 : (350 * (angle - 90) / 90) + 500;
-
             await device.MultiServoMove(
                 1000,
-                servo4: (ushort)calcServo4(quadDelta.AngleBA),
-                servo5: (ushort)calcServo5(quadDelta.AngleAD)
+                servo4: Arm.AngleToS4(quadDelta.AngleBA),
+                servo5: Arm.AngleToS5(quadDelta.AngleAD)
             );
             
             //for (int i = 0; i < 10; i++)
