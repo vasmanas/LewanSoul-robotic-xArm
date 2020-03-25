@@ -62,6 +62,17 @@
             var ad = Arm.S5ToAngle(positions[4]);
 
             var quadInit = Quadrilateral.WithTwoSidesTwoAngles(Arm.A, Arm.B, ad, ba);
+
+            var z0 = Arm.S6ToAngle(positions[5]);
+            var x0 = Triangle.Right.Base(quadInit.SideD, z0);
+            var y0 = Triangle.Right.Opposite(quadInit.SideD, z0);
+
+            var x1 = x0 - 30;
+            var y1 = y0 + 10;
+
+            var zDelta = Vector.Angle(x0, y0, x1, y1);
+            var z1 = z0 + zDelta;
+
             var quadDelta =
                 Quadrilateral.WithFourSides(
                     Arm.A,
@@ -76,7 +87,8 @@
             await device.MultiServoMove(
                 1000,
                 servo4: Arm.AngleToS4(quadDelta.AngleBA),
-                servo5: Arm.AngleToS5(quadDelta.AngleAD)
+                servo5: Arm.AngleToS5(quadDelta.AngleAD),
+                servo6: Arm.AngleToS6(z1)
             );
             
             //for (int i = 0; i < 10; i++)
