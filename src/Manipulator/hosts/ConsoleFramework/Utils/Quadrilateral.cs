@@ -39,8 +39,8 @@ namespace ConsoleFramework.Utils
         {
             Checks.GreaterThanZero(a, nameof(a));
             Checks.GreaterThanZero(b, nameof(b));
-            Checks.Between(ad, -90, 180, nameof(ad));
-            Checks.Between(ba, -90, 180, nameof(ba));
+            Checks.Between(ad, 0, 360, nameof(ad));
+            Checks.Between(ba, 0, 360, nameof(ba));
 
             var quad = new Quadrilateral();
 

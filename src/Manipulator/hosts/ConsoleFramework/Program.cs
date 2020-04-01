@@ -29,10 +29,10 @@
 
             var device = new Controller();
 
+            await Program.PointUp(device);
+
             var positions = await device.ServoPositionRead();
             Console.WriteLine(string.Join(",", positions));
-
-            await Program.PointUp(device);
 
             // Known:
             // side from base to first joint
@@ -121,7 +121,7 @@
                 servo2: 680, // [0, 1000]
                 servo3: 510, // [90 - 130, 180 - 510, 270 - 880]
                 servo4: 500, // [90 - 130, 180 - 500, 270 - 870]
-                servo5: 490, // [90 - 120, 180 - 490, 270 - 850]
+                servo5: 490, // [0 - 120, 90 - 490, 180 - 850]
                 servo6: 500); // [-90(right) - 120, 0 - 500, 90(left) - 880]
         }
     }

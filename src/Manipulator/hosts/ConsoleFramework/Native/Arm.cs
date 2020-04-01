@@ -54,17 +54,8 @@
         /// <returns>Servo value.</returns>
         public static ushort AngleToS5(double angle)
         {
+            // TODO: fix [90 - 120, 180 - 490, 270 - 850] => [0 - 120, 90 - 490, 180 - 850]
             return ToServo(120, 490, 850, angle);
-        }
-
-        /// <summary>
-        /// Servo 3 to angle.
-        /// </summary>
-        /// <param name="value">Servo value.</param>
-        /// <returns>Angle in degrees between 90 and 270. </returns>
-        public static double S3ToAngle(ushort value)
-        {
-            return ToAngle(130, 510, 880, value);
         }
 
         /// <summary>
@@ -88,6 +79,16 @@
             return (ushort)value;
         }
 
+        /// <summary>
+        /// Servo 3 to angle.
+        /// </summary>
+        /// <param name="value">Servo value.</param>
+        /// <returns>Angle in degrees between 90 and 270. </returns>
+        public static double S3ToAngle(ushort value)
+        {
+            return ToAngle(130, 510, 880, value);
+        }
+
 
         /// <summary>
         /// Servo 4 to angle.
@@ -106,7 +107,7 @@
         /// <returns>Angle in degrees between 90 and 270. </returns>
         public static double S5ToAngle(ushort value)
         {
-            return ToAngle(120, 490, 850, value);
+            return ToAngle(120, 490, 850, value) - 90.0;
         }
 
         /// <summary>
