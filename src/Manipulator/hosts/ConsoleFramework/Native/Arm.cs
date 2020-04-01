@@ -54,8 +54,7 @@
         /// <returns>Servo value.</returns>
         public static ushort AngleToS5(double angle)
         {
-            // TODO: fix [90 - 120, 180 - 490, 270 - 850] => [0 - 120, 90 - 490, 180 - 850]
-            return ToServo(120, 490, 850, angle);
+            return ToServo(120, 490, 850, angle + 90.0);
         }
 
         /// <summary>
