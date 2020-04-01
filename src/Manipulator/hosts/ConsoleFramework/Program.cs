@@ -34,8 +34,6 @@
 
             await Program.PointUp(device);
 
-            // TODO: caluclate z axis move
-
             // Known:
             // side from base to first joint
             // a = 98 mm
@@ -58,6 +56,10 @@
             //positions = await device.ServoPositionRead();
             //Console.WriteLine(string.Join(",", positions));
 
+            var xchange = -30;
+            var ychange = 10;
+            var zchange = 10;
+
             var ba = Arm.S4ToAngle(positions[3]);
             var ad = Arm.S5ToAngle(positions[4]);
 
@@ -67,8 +69,8 @@
             var x0 = Triangle.Right.Base(quadInit.SideD, z0);
             var y0 = Triangle.Right.Opposite(quadInit.SideD, z0);
 
-            var x1 = x0 - 30;
-            var y1 = y0 + 10;
+            var x1 = x0 + xchange;
+            var y1 = y0 + ychange;
 
             var zDelta = Vector.Angle(x0, y0, x1, y1);
             var z1 = z0 + zDelta;
@@ -78,7 +80,7 @@
                     Arm.A,
                     Arm.B,
                     Math.Abs(quadInit.SideC),
-                    Math.Abs(quadInit.SideD - 30)
+                    Math.Abs(quadInit.SideD + xchange)
                 );
 
             Console.WriteLine(quadDelta.AngleAD);
