@@ -56,7 +56,7 @@
             //positions = await device.ServoPositionRead();
             //Console.WriteLine(string.Join(",", positions));
 
-            var xchange = -30;
+            var xchange = 30;
             var ychange = 10;
             var zchange = 10;
 
@@ -70,7 +70,7 @@
             var y0 = Triangle.Right.Opposite(quadInit.SideD, z0);
 
             var x1 = x0 + xchange;
-            var y1 = y0 + ychange;
+            var y1 = y0 + zchange;
 
             var zDelta = Vector.Angle(x0, y0, x1, y1);
             var z1 = z0 + zDelta;
@@ -79,7 +79,7 @@
                 Quadrilateral.WithFourSides(
                     Arm.A,
                     Arm.B,
-                    Math.Abs(quadInit.SideC),
+                    Math.Abs(quadInit.SideC + ychange),
                     Math.Abs(quadInit.SideD + xchange)
                 );
 
