@@ -62,10 +62,14 @@
 
             var ba = Arm.S4ToAngle(positions[3]);
             var ad = Arm.S5ToAngle(positions[4]);
+            var z0 = Arm.S6ToAngle(positions[5]);
+
+            var za = Arm.A * Math.Cos(Converter.DegreesToRadians(ad)) * Math.Sin(Converter.DegreesToRadians(z0));
+            var xa = Arm.A * Math.Cos(Converter.DegreesToRadians(ad)) * Math.Cos(Converter.DegreesToRadians(z0));
+            var ya = Arm.A * Math.Sin(Converter.DegreesToRadians(ad));
 
             var quadInit = Quadrilateral.WithTwoSidesTwoAngles(Arm.A, Arm.B, ad, ba);
 
-            var z0 = Arm.S6ToAngle(positions[5]);
             var x0 = Triangle.Right.Base(quadInit.SideD, z0);
             var y0 = Triangle.Right.Opposite(quadInit.SideD, z0);
 
