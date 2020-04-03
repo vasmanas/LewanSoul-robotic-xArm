@@ -88,5 +88,22 @@ namespace ConsoleFramework.Utils
             var angle = Converter.RadiansToDegrees(radians);
             return angle;
         }
+
+        /// <summary>
+        /// Calculates opposite side when angle and two sides are known.
+        /// </summary>
+        /// <param name="sideA">Side length.</param>
+        /// <param name="sideB">Side length.</param>
+        /// <param name="angle">Angle in degrees.</param>
+        /// <returns>Opposite side to an angle length.</returns>
+        public static double Opposite(double sideA, double sideB, double angle)
+        {
+            Checks.GreaterThanZero(sideA, nameof(sideA));
+            Checks.GreaterThanZero(sideB, nameof(sideB));
+            Checks.Between(angle, 0, 180, nameof(angle));
+
+            var opposite = Math.Sqrt(sideA * sideA + sideB * sideB - 2 * sideA * sideB * Math.Cos(Converter.DegreesToRadians(angle)));
+            return opposite;
+        }
     }
 }

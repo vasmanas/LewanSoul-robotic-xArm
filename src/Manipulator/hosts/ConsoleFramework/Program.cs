@@ -64,9 +64,20 @@
             var ad = Arm.S5ToAngle(positions[4]);
             var z0 = Arm.S6ToAngle(positions[5]);
 
-            var za = Arm.A * Math.Cos(Converter.DegreesToRadians(ad)) * Math.Sin(Converter.DegreesToRadians(z0));
-            var xa = Arm.A * Math.Cos(Converter.DegreesToRadians(ad)) * Math.Cos(Converter.DegreesToRadians(z0));
-            var ya = Arm.A * Math.Sin(Converter.DegreesToRadians(ad));
+            // coordinates of ba point
+            var ba_z = Arm.A * Math.Cos(Converter.DegreesToRadians(ad)) * Math.Sin(Converter.DegreesToRadians(z0));
+            var ba_x = Arm.A * Math.Cos(Converter.DegreesToRadians(ad)) * Math.Cos(Converter.DegreesToRadians(z0));
+            var ba_y = Arm.A * Math.Sin(Converter.DegreesToRadians(ad));
+
+            // caclulating coordinates of cb point
+            var o = Triangle.Opposite(Arm.A, Arm.B, z0 > 180.0 ? z0 - 180.0 : z0);
+            var o_delta = Triangle.Angle(Arm.A, o, Arm.B);
+            var od = ad + (z0 < 180.0 ? -1 : 1) * o_delta;
+
+            // coordinates of cb point
+            var cb_z = o * Math.Cos(Converter.DegreesToRadians(od)) * Math.Sin(Converter.DegreesToRadians(z0));
+            var cb_x = o * Math.Cos(Converter.DegreesToRadians(od)) * Math.Cos(Converter.DegreesToRadians(z0));
+            var cb_y = o * Math.Sin(Converter.DegreesToRadians(od));
 
             var quadInit = Quadrilateral.WithTwoSidesTwoAngles(Arm.A, Arm.B, ad, ba);
 
