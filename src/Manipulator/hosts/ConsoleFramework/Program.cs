@@ -97,7 +97,7 @@
             var ad1 = ad1_upper + ad1_bottom;
 
             // calculate new angles z1
-            // TODO: var z1 = ?;
+            var z1 = Converter.RadiansToDegrees(Math.Acos(cb1_x / (o_magnitude * Converter.RadiansToDegrees(Math.Cos(ad1)))));
 
             var quadInit = Quadrilateral.WithTwoSidesTwoAngles(Arm.A, Arm.B, ad, ba);
 
