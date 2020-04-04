@@ -39,6 +39,21 @@ namespace ConsoleFramework.Utils
             }
 
             /// <summary>
+            /// Calculate angle from hypotenuse and opposite.
+            /// </summary>
+            /// <param name="hypotenuse">Hypotenuse length.</param>
+            /// <param name="opposite">Opposite length.</param>
+            /// <returns>Angle in degrees.</returns>
+            public static double Angle(double hypotenuse, double opposite)
+            {
+                Checks.GreaterThanZero(hypotenuse, nameof(hypotenuse));
+                Checks.GreaterThanZero(hypotenuse, nameof(opposite));
+
+                var angle = Converter.RadiansToDegrees(Math.Asin(hypotenuse / opposite));
+                return angle;
+            }
+
+            /// <summary>
             /// Calculates side of right triangle from hypotenuse and side using Pythagorean theorem.
             /// https://en.wikipedia.org/wiki/Pythagorean_theorem.
             /// </summary>

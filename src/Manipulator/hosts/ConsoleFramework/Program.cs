@@ -82,6 +82,23 @@
             var cb_x = o * Math.Cos(od_rad) * Math.Cos(z0_rad);
             var cb_y = o * Math.Sin(od_rad);
 
+            // coordinates of cb1 point
+            var cb1_z = cb_z + xchange;
+            var cb1_x = cb_x + ychange;
+            var cb1_y = cb_y + zchange;
+
+            // calculate new position of ba1
+            var o_magnitude = Math.Sqrt(cb1_x * cb1_x + cb1_y * cb1_y + cb1_z * cb1_z);
+            var ba1 = Triangle.Angle(Arm.A, Arm.B, o_magnitude);
+
+            // calculate new position of ad1
+            var ad1_upper = Triangle.Angle(Arm.A, o_magnitude, Arm.B);
+            var ad1_bottom = Triangle.Right.Angle(o_magnitude, cb1_y);
+            var ad1 = ad1_upper + ad1_bottom;
+
+            // calculate new angles z1
+            // TODO: var z1 = ?;
+
             var quadInit = Quadrilateral.WithTwoSidesTwoAngles(Arm.A, Arm.B, ad, ba);
 
             var x0 = Triangle.Right.Base(quadInit.SideD, z0);
