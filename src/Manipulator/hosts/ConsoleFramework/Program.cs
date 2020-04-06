@@ -99,35 +99,42 @@
             // calculate new angles z1
             var z1 = Converter.RadiansToDegrees(Math.Acos(cb1_x / (o_magnitude * Converter.RadiansToDegrees(Math.Cos(ad1)))));
 
-            var quadInit = Quadrilateral.WithTwoSidesTwoAngles(Arm.A, Arm.B, ad, ba);
-
-            var x0 = Triangle.Right.Base(quadInit.SideD, z0);
-            var y0 = Triangle.Right.Opposite(quadInit.SideD, z0);
-
-            var x1 = x0 + xchange;
-            var y1 = y0 + zchange;
-
-            var zDelta = Vector.Angle(x0, y0, x1, y1);
-            var z1 = z0 + zDelta;
-
-            var quadDelta =
-                Quadrilateral.WithFourSides(
-                    Arm.A,
-                    Arm.B,
-                    Math.Abs(quadInit.SideC + ychange),
-                    Math.Abs(quadInit.SideD + xchange)
-                );
-
-            Console.WriteLine(quadDelta.AngleAD);
-            Console.WriteLine(quadDelta.AngleBA);
-
             await device.MultiServoMove(
                 1000,
-                servo4: Arm.AngleToS4(quadDelta.AngleBA),
-                servo5: Arm.AngleToS5(quadDelta.AngleAD),
+                servo4: Arm.AngleToS4(ba1),
+                servo5: Arm.AngleToS5(ad1),
                 servo6: Arm.AngleToS6(z1)
             );
-            
+
+            ////var quadInit = Quadrilateral.WithTwoSidesTwoAngles(Arm.A, Arm.B, ad, ba);
+
+            ////var x0 = Triangle.Right.Base(quadInit.SideD, z0);
+            ////var y0 = Triangle.Right.Opposite(quadInit.SideD, z0);
+
+            ////var x1 = x0 + xchange;
+            ////var y1 = y0 + zchange;
+
+            ////var zDelta = Vector.Angle(x0, y0, x1, y1);
+            ////var z1 = z0 + zDelta;
+
+            ////var quadDelta =
+            ////    Quadrilateral.WithFourSides(
+            ////        Arm.A,
+            ////        Arm.B,
+            ////        Math.Abs(quadInit.SideC + ychange),
+            ////        Math.Abs(quadInit.SideD + xchange)
+            ////    );
+
+            ////Console.WriteLine(quadDelta.AngleAD);
+            ////Console.WriteLine(quadDelta.AngleBA);
+
+            ////await device.MultiServoMove(
+            ////    1000,
+            ////    servo4: Arm.AngleToS4(quadDelta.AngleBA),
+            ////    servo5: Arm.AngleToS5(quadDelta.AngleAD),
+            ////    servo6: Arm.AngleToS6(z1)
+            ////);
+
             //for (int i = 0; i < 10; i++)
             //{
             //    await device.MultiServoMove(250, 700, 700, 613, 179, 738, 512);
